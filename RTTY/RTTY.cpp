@@ -2,8 +2,8 @@
 #include "RTTY.h"
 
 #define BAUD_RATE 22 // 45.45 baud
-#define MARK 2125
-#define SPACE 1955
+//#define MARK 2125
+//#define SPACE 1955
 
 RTTY5::RTTY5()
 {
@@ -13,7 +13,8 @@ void RTTY5::attach(byte pin)
 {
     rtty_pin = pin;
     pinMode(rtty_pin, OUTPUT);
-    tone(rtty_pin, MARK);
+    //tone(rtty_pin, MARK);
+    digitalWrite(rtty_pin, HIGH);
 }
 
 
@@ -70,12 +71,14 @@ void RTTY5::rtty_txbit (bool bit)
     if (bit)
     {
         // MARK
-        tone(rtty_pin, MARK);
+        //tone(rtty_pin, MARK);
+        digitalWrite(rtty_pin, HIGH);
     }
     else
     {
         // SPACE
-        tone(rtty_pin, SPACE);
+        //tone(rtty_pin, SPACE);
+        digitalWrite(rtty_pin, LOW);
     }
     
     delay(BAUD_RATE);
